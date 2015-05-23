@@ -1,0 +1,23 @@
+pcget2
+
+This version should work exactly like the original pcget, except it can write
+directly to floppy by giving the command option -w.
+
+pcget2 -w
+
+The program will now ask to change disk (I recommend running this binary
+from disk because it uses a lot of memory), and it will format the disk, 
+filling it with the data provided by amigaput writing 20 tracks at a time. 
+WARNING: It destroys all data on the disk!
+
+Use amigaput2 to send data, it is more patient if the receiver stops to write
+the tracks to disk.
+
+If pcget2 does not work for some reason, you could try to use the pcget_debug 
+binary, which writes 5 tracks at a time and will verify the written tracks. 
+I made it do find out why the disks I made did not work, it was a virus!
+
+BUGS:
+pcget2 Always says that the filesize is 0 when the -w option is given.
+pcget2 will write everything to disk when the -w option is given, no additional
+checking for filesize or headers is done.

@@ -1,0 +1,52 @@
+A friend of mine sold me an Amiga 500 with 512Kb RAM and one floppy drive, 
+a printer, some documentation, some games, some other software and luckily a 
+working copy of workbench 1.2. I wanted to play some games I found on the 
+internet, but I had no idea where to start.
+
+After some searching I found transwarp 
+(http://homepage.uibk.ac.at/homepage/c725/c72578/amiga/)
+and made the serial cross-cable, however, transwarp does not handle unformatted
+disks very well and it is pretty slow. Another thing is that I could not find 
+a Linux version for the PC side.
+
+Then I stumbled on GreG's PC-to-Amiga link page
+(http://goanna.cs.rmit.edu.au/~craske/amiga/)
+and made the parallel cross cable (well, not quite, but mine worked too), 
+however, pcget can not write directly to the floppy disk, which was just what 
+I needed, having no other temporary space. I first tried to chop up the images,
+but I did not find that acceptable. So I installed UAE with NDK_3.1 and Dice 
+and began tinkering with the code. At first I attempted to merge pcget with the
+relevant portions of transwarp, but the same problems arose again (unformatted 
+disks). Then I found a file called hd2f.c (http://wandel.ca/homepage/amiga_sw/)
+which uses TD_FORMAT, this did work quite nice. At this point another friend of
+mine told me where to find the documentation of these functions (it was 
+somewhere in the NDK_3.1 tree), this was nice because there was still one 
+problem left.
+
+For some reason the floppies I made did not work, so I made a debug version of
+pcget, which writes some tracks, reads them back into another buffer and, if
+the buffers are not equal, print out a nasty message and dumps the first forty
+bytes of these buffers to the screen. I then found out that only track 0 went
+wrong, and by looking at the data that was read back, I concluded that I had
+a virus on my only boot disk. Luckily I found an anti-virus disk that came 
+with the Amiga and luckily it worked.
+
+After getting rid of the virus, the modified pcget binary worked perfectly, 
+except that when I turned off the emulator (which made the load on my machine
+drop), the amigaput binary became much faster and disconnected when the Amiga
+started to write to the disk. So I tinkered with the amigaput program a bit, I
+just increased some timeouts. By the way, I do not think that amigaput needs
+to take 100% CPU time, but I did not want to rewrite the code.
+
+So, there I was, I then made several copies of the workbench disk and started
+playing. It takes about 1 minute and 50 seconds to transfer a disk image to
+floppy. At this point I was satisfied so I did not made any more modifications.
+
+It might be nice to make a version of amigaput that does not wait for 
+acknowledgements, just to get the pcget binary to the amiga with the type 
+command. It would eliminate the need for the serial cable. And maybe if 
+both programs are backported, the guys of UAE will include it in their next 
+version... just a thought.
+
+--
+Jeroen Laros. (jlaros@liacs.nl)
