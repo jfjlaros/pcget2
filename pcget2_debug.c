@@ -405,7 +405,7 @@ main(int argc, char *argv[]) {
             td_iob->io_Data = (APTR) checkbuf;
             DoIO(td_iob);
             if (err = memcmp(outbuf, checkbuf, TD_BUFSIZE))
-              printf("FUCK! %i                                \n", err);
+              printf("Read back failed, error number %i.\n", err);
           }
           else
             /* END DISK WRITE*/
