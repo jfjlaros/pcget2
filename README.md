@@ -9,7 +9,7 @@ This project is a modified version of Greg Craske's
 project. The modifications made are marked in de source code by the tag: `DISK
 WRITE`. The modified version can write directly to an unformatted Amiga
 diskette, which may be necessary if no temporary space (like a hard drive) is
-not present on the Amiga.
+present on the Amiga.
 
 Support for unformatted diskettes is based on `hd2f.c` from Markus Wandel, see
 his [Amiga Software](http://wandel.ca/homepage/amiga_sw/) page for more
